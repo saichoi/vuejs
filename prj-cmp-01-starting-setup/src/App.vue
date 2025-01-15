@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import TheHeader from './layouts/TheHeader.vue';
-import TheResources from './components/learning-resources/TheResources.vue';
+import TheHeader from './layouts/TheHeader';
+import TheResources from './components/learning-resources/TheResources';
 
 export default {
     components: {
