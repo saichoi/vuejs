@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <div class="overlay" @click="$emit('close')"></div>
+    <teleport to="body">
+        <div @click="$emit('close')"></div>
         <dialog open>
             <header>
                 <slot name="header">
@@ -18,7 +18,7 @@
                 </slot>
             </menu>
         </dialog>
-    </div>
+    </teleport>
 </template>
 
 <script>
@@ -34,7 +34,7 @@ export default {
 </script>
 
 <style scoped>
-.overlay {
+div {
   position: fixed;
   top: 0;
   left: 0;
