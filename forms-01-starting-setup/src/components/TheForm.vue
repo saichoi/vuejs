@@ -51,6 +51,11 @@
       </div>
     </div>
 
+    <!-- 커스텀 컨트롤 컴포넌트 -->
+    <div class="form-control">
+      <rating-control></rating-control>
+    </div>
+
     <!-- 체크박스가 하나인 경우: ture or false로 값을 넣어야한다. -->
     <div class="form-control">
       <input type="checkbox" id="confirm-terms" name="confirm-terms" v-model="confirm"/>
@@ -64,7 +69,12 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue';
+
 export default {
+  components: {
+    RatingControl
+  },
   data() {
       return {
         userName: '',
