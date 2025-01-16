@@ -1,21 +1,29 @@
 <template>
     <ul>
-        <li :class="{active: activeOption === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li>
-        <li :class="{active: activeOption === 'average'}"><button type="button" @click="activate('average')">Average</button></li>
-        <li :class="{active: activeOption === 'great'}"><button type="button" @click="activate('great')">Great</button></li>
+        <li :class="{active: modelValue === 'poor'}"><button type="button" @click="activate('poor')">Poor</button></li>
+        <li :class="{active: modelValue === 'average'}"><button type="button" @click="activate('average')">Average</button></li>
+        <li :class="{active: modelValue === 'great'}"><button type="button" @click="activate('great')">Great</button></li>
     </ul>
 </template>
 
 <script>
 export default {
-    data() {
-        return {
-            activeOption: null
-        }
-    },
+    props: ['modelValue'],
+    emits: ['update:modelValue'],
+    // data() {
+    //     return {
+    //         activeOption: this.modelValue // TheForm 컴포넌트의 rating 초기값을 가져온다.
+    //     }
+    // },
+    // computed: {
+    //     activeOption() {
+    //         return this.modelValue;
+    //     }
+    // },
     methods: {
       activate(option) {
-        this.activeOption = option;
+        // this.activeOption = option;
+        this.$emit('update:modelValue', option);
       }  
     }
 }

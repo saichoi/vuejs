@@ -53,7 +53,9 @@
 
     <!-- 커스텀 컨트롤 컴포넌트 -->
     <div class="form-control">
-      <rating-control></rating-control>
+      <!-- v-model은 내부적으로 이렇게 움직인다.
+      :model-value="" @update:modelValue="" -->
+      <rating-control v-model="rating"></rating-control>
     </div>
 
     <!-- 체크박스가 하나인 경우: ture or false로 값을 넣어야한다. -->
@@ -83,6 +85,7 @@ export default {
         interest: [],
         how: null,
         confirm: false,
+        rating: null,
         userNameValidity: 'pending'
       }
     },
@@ -101,7 +104,8 @@ export default {
       this.how = null;
       console.log('confirm', this.confirm);
       this.confirm = false;
-      
+      console.log('Rating', this.rating);
+      this.rating = null;
     },
     validateInput() {
       if (this.userName === '') {
