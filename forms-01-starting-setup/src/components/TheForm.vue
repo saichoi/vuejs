@@ -6,7 +6,10 @@
     </div>
     <div class="form-control">
       <label for="age">Your Age (Years)</label>
-      <input id="age" name="age" type="number" />
+      <!-- vue에서는 input의 type을 number로 지정하면 자동으로 입력된 값을 숫자로 변환한다.
+      이는 v-model.number="userAge"와 동일한 방법으로 종류가 다양하다. 
+      그 종류로는 v-model.trim, v-model.lazy 등이 존재한다.-->
+      <input id="age" name="age" type="number" v-model="userAge" />
     </div>
     <div class="form-control">
       <label for="referrer">How did you hear about us?</label>
@@ -57,12 +60,17 @@ export default {
   data() {
       return {
         userName: '',
+        userAge: null
       }
     },
   methods: {
     submitForm() {
       console.log('Username', this.userName);
       this.userName = '';
+      console.log('User age:');
+      console.log(this.userAge);
+      console.log(31);
+      this.userAge = null;
     }
   }
 }
