@@ -5,13 +5,17 @@ import App from './App.vue';
 import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
+import NotFound from './components/nav/NotFound.vue';
 
 const router = createRouter({
     history: createWebHistory(), 
     routes: [
-        { path: '/teams', component: TeamsList},
+        { path: '/', redirect: '/teams'},
+        { path: '/teams', component: TeamsList }, // alias: '/' 옵션을 사용하면 도메인에서 /team와 동일한 화면을 보여준다.
         { path: '/users', component: UsersList},
         { path: '/teams/:teamId', component: TeamMembers, props:true },// props: ture -> id를 전달하도록 유도한다.
+        // { path: '/:notFoudn(.*)', redirect: '/teams'}
+        { path: '/:notFoudn(.*)', component: NotFound } // 마지막에 작성해서 최종 수단으로 사용한다.
     ],
     linkActivClass: 'router-link-active'
 });
