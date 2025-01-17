@@ -32,7 +32,6 @@ export default {
     const teamId = this.$route.params.teamId;    
     const selectedTeam = this.teams.find(team => team.id === teamId);
     const members = selectedTeam.members;
-    console.log(members);
     const selectedMembers = [];
     for (const member of members) {
       const selectedUser = this.users.find(user => user.id === member);
