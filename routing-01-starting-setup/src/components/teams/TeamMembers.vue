@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2">Go to Team2</router-link>
   </section>
 </template>
 
@@ -26,19 +27,29 @@ export default {
       members: [],
     };
   },
-  created() {
-    // TeamMembers 컴포넌트는 router를 통해 로드되었기 때문에 route 기능을 사용할 수 있다. 
-    // this.$route.path // teams/t1
-    const teamId = this.$route.params.teamId;    
-    const selectedTeam = this.teams.find(team => team.id === teamId);
-    const members = selectedTeam.members;
-    const selectedMembers = [];
-    for (const member of members) {
-      const selectedUser = this.users.find(user => user.id === member);
-      selectedMembers.push(selectedUser);
+  methods: {
+    loadTeamMembers(route) {
+      // TeamMembers 컴포넌트는 router를 통해 로드되었기 때문에 route 기능을 사용할 수 있다. 
+      // this.$route.path // teams/t1
+      const teamId = route.params.teamId;    
+      const selectedTeam = this.teams.find(team => team.id === teamId);
+      const members = selectedTeam.members;
+      const selectedMembers = [];
+      for (const member of members) {
+        const selectedUser = this.users.find(user => user.id === member);
+        selectedMembers.push(selectedUser);
+      }
+      this.members = selectedMembers;
+      this.teamName = selectedTeam.name;
     }
-    this.members = selectedMembers;
-    this.teamName = selectedTeam.name;
+  },
+  created() {
+    this.loadTeamMembers(this.$route);
+  },
+  watch: {
+    $route(newRoute) {
+      this.loadTeamMembers(newRoute);
+    }
   }
 };
 </script>
