@@ -18,6 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
+  props: ['teamId'],
   components: {
     UserItem
   },
@@ -28,10 +29,9 @@ export default {
     };
   },
   methods: {
-    loadTeamMembers(route) {
+    loadTeamMembers(teamId) {
       // TeamMembers 컴포넌트는 router를 통해 로드되었기 때문에 route 기능을 사용할 수 있다. 
-      // this.$route.path // teams/t1
-      const teamId = route.params.teamId;    
+      // this.$route.path // teams/t1 
       const selectedTeam = this.teams.find(team => team.id === teamId);
       const members = selectedTeam.members;
       const selectedMembers = [];
@@ -44,11 +44,12 @@ export default {
     }
   },
   created() {
-    this.loadTeamMembers(this.$route);
+    // this.loadTeamMembers($this.route); $route는 routing으로 로드된 경우에만 값을 가지고 있기 때문에 teamId를 사용하도록 코드를 수정한다.
+    this.loadTeamMembers(this.teamId);
   },
   watch: {
-    $route(newRoute) {
-      this.loadTeamMembers(newRoute);
+    teamId(newId) {
+      this.loadTeamMembers(newId);
     }
   }
 };
