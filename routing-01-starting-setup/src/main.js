@@ -11,7 +11,7 @@ const router = createRouter({
     routes: [
         { path: '/teams', component: TeamsList},
         { path: '/users', component: UsersList},
-        { path: '/teams/:teamId', component: TeamMembers },
+        { path: '/teams/:teamId', component: TeamMembers, props:true },// props: ture -> id를 전달하도록 유도한다.
     ],
     linkActivClass: 'router-link-active'
 });
