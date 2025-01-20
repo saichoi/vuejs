@@ -46,6 +46,7 @@ export default {
   created() {
     // this.loadTeamMembers($this.route); $route는 routing으로 로드된 경우에만 값을 가지고 있기 때문에 teamId를 사용하도록 코드를 수정한다.
     this.loadTeamMembers(this.teamId);
+    console.log(this.$route.query);
   },
   watch: {
     teamId(newId) {
