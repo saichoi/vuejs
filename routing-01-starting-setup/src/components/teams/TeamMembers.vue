@@ -48,6 +48,15 @@ export default {
     this.loadTeamMembers(this.teamId);
     console.log(this.$route.query);
   },
+
+  // 컴포넌트가 재사용해야 할 때마다 호출. 컴포넌트가 라우팅으로 로딩되거나 새로고침 시에만 호출.
+  beforeRouteUpdate(to, from, next) {
+    console.log('TeamMember Cmp beforeRouteUpdate');
+    console.log(to, from);
+    // this.loadTeamMembers(to.params.teamId);
+    next();
+  },
+
   watch: {
     teamId(newId) {
       this.loadTeamMembers(newId);
