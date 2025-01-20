@@ -50,7 +50,7 @@ const router = createRouter({
     }
 });
 
-// 전역 가드
+// 전역 가드 1
 router.beforeEach(function(to, from, next) {
     console.log('Global beforeEach');
     console.log(to, from);
@@ -60,6 +60,15 @@ router.beforeEach(function(to, from, next) {
     //     next({ name: 'team-members', params: { teamId: 't2' }});
     // }
     next();
+});
+
+// 전역 가드 2 : 한번 실행되면 이동이 승인되기 때문에 next 함수는 존재하지 않음
+router.afterEach(function(to, from) {
+    // Sending analytics data
+    console.log('Global afterEach');
+    
+    console.log(to, from);
+    
 });
 
 const app = createApp(App)
