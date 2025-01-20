@@ -11,8 +11,8 @@ const router = createRouter({
     history: createWebHistory(), 
     routes: [
         { path: '/', redirect: '/teams'},
-        { path: '/teams', component: TeamsList, children: [
-                { path: ':teamId', component: TeamMembers, props:true },// props: ture -> id를 전달하도록 유도한다.
+        { name: 'teams', path: '/teams', component: TeamsList, children: [
+                { name: 'team-members', path: ':teamId', component: TeamMembers, props:true },// props: ture -> id를 전달하도록 유도한다.
             ] 
         }, // alias: '/' 옵션을 사용하면 도메인에서 /team와 동일한 화면을 보여준다.
         { path: '/users', component: UsersList},
