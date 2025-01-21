@@ -1,11 +1,17 @@
 <template>
   <div class="container">
-    <div class="block" :class="{animate: animatedBlock}"></div> 
+    <div class="block" :class="{ animate: animatedBlock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
-    <transition name="para" 
-      enter-to-class="some-class" enter-active-class="some-class"
+    <transition
+      name="para"
+      @before-enter="beforeEnter"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @before-leave="beforeLeave"
+      @leave="leave"
+      @after-leave="afterLeave"
     >
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
     </transition>
@@ -19,7 +25,7 @@
   </div>
   <!-- <transition name="modal"> -->
   <base-modal @close="hideDialog" :open="dialogIsVisible">
-      <p>This is a test dialog!</p>
+    <p>This is a test dialog!</p>
     <button @click="hideDialog">Close it!</button>
   </base-modal>
   <!-- </transition> -->
@@ -39,6 +45,25 @@ export default {
     };
   },
   methods: {
+    beforeEnter(el) {
+      console.log('beforeEnter', el);
+    },
+    enter(el) {
+      console.log('enter', el);
+    },
+    afterEnter(el) {
+      // 애니메이션이 모두 끝나면 호출된다.
+      console.log('afterEnter', el);
+    },
+    beforeLeave(el) {
+      console.log('beforeLeave', el);
+    },
+    leave(el) {
+      console.log('leave', el);
+    },
+    afterLeave(el) {
+      console.log('afterLeave', el);
+    },
     showUsers() {
       this.usersAreVisible = true;
     },
@@ -117,7 +142,7 @@ button:active {
 }
 
 .para-enter-active {
-  animation: slid-scale 0.3s ease-out;
+  animation: slid-scale 2s ease-out;
 }
 
 .para-enter-to {
@@ -131,7 +156,7 @@ button:active {
 }
 
 .para-leave-active {
-  transition: slid-scale 0.3s  ease-in;
+  transition: slid-scale 2s ease-in;
 }
 
 .para-leave-to {
