@@ -4,8 +4,9 @@
     <button @click="animateBlock">Animate</button>
   </div>
   <div class="container">
+    <!-- :css="false" js만 사용해서 애니메이션을 사용하는 경우, css 애니메이션 코드를 분석하지 않게 만들어 불필요한 단계가 사라져 성능이 상승 -->
     <transition
-      name="para"
+      :css="false"
       @before-enter="beforeEnter"
       @enter="enter"
       @after-enter="afterEnter"
