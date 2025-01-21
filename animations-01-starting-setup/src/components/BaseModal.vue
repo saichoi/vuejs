@@ -34,5 +34,20 @@ dialog {
   background-color: white;
   z-index: 100;
   border: none;
+  animation: modal 0.3s ease-out forwards;
+}
+
+/* animation을 넣을 때 css만으로 충분하지 않은 이유 */
+/* dialog가 닫힐 때 DOM에서 사라지기 때문에 css를 넣을 수 없다. */
+@keyframes modal {
+  from {
+    opacity: 0;
+    transform: translateX(-50px) scale(0.9);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateX(0px) scale(1);
+  }
 }
 </style>
