@@ -65,7 +65,7 @@ button:active {
   margin-bottom: 2rem;
 
   /* transform이 적용된 모든 곳에 애니메이션을 넣는다. */
-  transition: transform 0.3s ease-out; 
+  /* transition: transform 0.3s ease-out;  */
 }
 .container {
   max-width: 40rem;
@@ -80,6 +80,21 @@ button:active {
 }
 
 .animate {
-  transform: translateX(-100px);
+  /* transform: translateX(-100px); */
+  animation: slid-fade 0.3s ease-out forwards;
+}
+
+@keyframes slid-fade {
+  0% {
+    transform: translateX(0) scale(1);
+  }
+
+  70% {
+    transform: translateX(-120px) scale(1.1);
+  }
+
+  100% {
+    transform: translateX(-150px) scale(1);
+  }
 }
 </style>
