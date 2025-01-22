@@ -57,9 +57,14 @@ li {
 }
 .user-list-leave-active {
     transition: all 1s ease-in;
+    /* 삭제되는 요소의 위치를 알려준다. */
+    position: absolute;
 }
 .user-list-leave-to {
     opacity: 0;
     transform: translateX(30px);
+}
+.user-list-move {
+    transition: transform 0.8s ease;
 }
 </style>
