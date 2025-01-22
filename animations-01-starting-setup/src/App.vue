@@ -1,52 +1,17 @@
 <template>
-  <div class="container">
-    <users-list></users-list>
-  </div>
-  <div class="container">
-    <div class="block" :class="{ animate: animatedBlock }"></div>
-    <button @click="animateBlock">Animate</button>
-  </div>
-  <div class="container">
-    <!-- :css="false" js만 사용해서 애니메이션을 사용하는 경우, css 애니메이션 코드를 분석하지 않게 만들어 불필요한 단계가 사라져 성능이 상승 -->
-    <transition
-      :css="false"
-      @before-enter="beforeEnter"
-      @enter="enter"
-      @after-enter="afterEnter"
-      @before-leave="beforeLeave"
-      @leave="leave"
-      @after-leave="afterLeave"
-      @enter-cancelled="enterCancelled"
-      @leave-cancelled="leaveCancelled"
-    >
-      <p v-if="paraIsVisible">This is only sometimes visible...</p>
-    </transition>
-    <button @click="toggleParagraph">Toggle Paragraph</button>
-  </div>
-  <div class="container">
-    <transition name="fade-button" mode="out-in">
-      <button @click="showUsers" v-if="!usersAreVisible">Show Users</button>
-      <button @click="hideUsers" v-else>Hide Users</button>
-    </transition>
-  </div>
-  <!-- <transition name="modal"> -->
-  <base-modal @close="hideDialog" :open="dialogIsVisible">
-    <p>This is a test dialog!</p>
-    <button @click="hideDialog">Close it!</button>
-  </base-modal>
-  <!-- </transition> -->
-  <div class="container">
-    <button @click="showDialog">Show Dialog</button>
-  </div>
+    <router-view v-slot="slotProps">
+      <!-- out-in : 나타나는 컴포넌트보다 사라지는 컴포넌트에 애니메이션이 먼저 적용된다. 기존 컴포넌트가 사라진 다음 새 컴포넌트가 나타난다.-->
+      <!-- 페이지가 처음 뜰 때도 애니메이션이 재생(초기 애니메이션)된다. 
+      그 이유는 router-view에서 첫 활성 라우트가 빈 라우트('/')이기 때문이다.
+      -->
+      <transition name="fade-button" mode="out-in">
+        <component :is="slotProps.Component"></component>
+      </transition>
+    </router-view>
 </template>  
 
 <script>
-import UsersList from './components/UsersList.vue';
-
 export default {
-  components: {
-    UsersList
-  },  
   data() {
     return {
       animatedBlock: false,
@@ -196,6 +161,13 @@ button:active {
 .fade-button-enter-to,
 .fade-button-leave-from {
   opacity: 1;
+}
+
+.route-enter-active {
+  animation: slid-scale 0.4s ease-out;
+}
+.route-leave-active {
+  animation: slid-scale 0.4s ease-in;
 }
 
 @keyframes slid-scale {
