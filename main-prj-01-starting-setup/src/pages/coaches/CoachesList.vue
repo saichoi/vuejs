@@ -1,10 +1,12 @@
 <template>
-    <div>
-        <section>
-            FILTER
-        </section>
-        <section>
-            LIST OF COASCHES
-        </section>
-    </div>
+  <div>
+    <section>FILTER</section>
+    <section>
+        <div class="controls">
+            <button>Refresh</button>
+            <router-link to="/register">Register as Coach</router-link>
+        </div>
+      <ul>LIST OF COASCHES</ul>
+    </section>
+  </div>
 </template>
