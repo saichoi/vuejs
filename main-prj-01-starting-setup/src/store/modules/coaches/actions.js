@@ -1,7 +1,7 @@
 export default {
-    registerCoach(context, data) {
+    async registerCoach(context, data) {
+        const userId = context.rootGetters.userId;
         const coachData = {
-            id: context.rootGetters.userId,
             firstName: data.first,
             lastName: data.last,
             description: data.desc,
@@ -9,6 +9,21 @@ export default {
             areas: data.areas
         }
 
-        context.commit('registerCoach', coachData);
+        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/coaches/${userId}.json`, {
+            method: 'PUT', // POST는 항상 새로운 코치를 등록하지만 PUT으로 하면 이미 존재하는 경우 덮어쓰기를 하고 존재하지 않는 경우 새로 생성한다.
+            body: JSON.stringify(coachData)
+            
+        });
+
+        // const responseData = await response.json();
+
+        if (!response.ok) {
+            // error ...
+        }
+
+        context.commit('registerCoach', {
+            ...coachData,
+            id: userId
+        });
     }
 }
