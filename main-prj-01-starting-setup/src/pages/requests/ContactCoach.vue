@@ -35,6 +35,7 @@ export default {
         this.formIsValid = false;
         return;
       }
+      // 여기서 에러 처리를 할지 말지 정하여 코드를 작성한다. CoachesList.vue를 참고할 수 있다.
       this.$store.dispatch('requests/contactCoach', {
         email: this.email,
         message: this.message,
