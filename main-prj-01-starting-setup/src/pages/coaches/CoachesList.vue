@@ -1,5 +1,9 @@
 <template>
   <div>
+    <!-- error만 절달하면 show에 대한 값으로 문자열 전달 !!을 사용하면 실제 boolean 값을 전달한다. -->
+    <base-dialog :show="!!error" title="An error occurred!" @close="handleError">
+      <p>{{ error }}</p>
+    </base-dialog>
     <section>
       <coach-filter @change-filter="setFilters"></coach-filter>
     </section>
@@ -41,6 +45,7 @@ export default {
   data() {
     return {
       isLoading: false,
+      error: null,
       activeFilters: {
         frontend: true,
         backend: true,
@@ -81,8 +86,16 @@ export default {
     },
     async loadCoaches() {
       this.isLoading = true;
-      await this.$store.dispatch('coaches/loadCoaches');
+      try {
+        await this.$store.dispatch('coaches/loadCoaches');
+      } catch(error) {
+        this.error = error.message || 'Someting went wrong!';
+      }
+      
       this.isLoading = false;
+    },
+    handleError() {
+      this.error = null;
     }
   },
 };
