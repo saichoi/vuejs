@@ -23,6 +23,8 @@ export default {
             return this.$route.path + '/' + this.id + '/contact';
         },
         coachDetailLink() {
+          console.log(this.id);
+          
             return this.$route.path + '/' + this.id;
         }
     }
