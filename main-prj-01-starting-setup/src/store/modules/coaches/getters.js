@@ -9,5 +9,13 @@ export default {
         const coaches = getters.coaches;
         const userId = rooterGetters.userId; // 전역에 선언되어 있는 userId에 접근하기 위해서는 rootGetter을 사용해야한다.
         return coaches.some(coach => coach.id === userId);
+    },
+    shouldUpdate(state) {
+        const lastFetch = state.lastFetch;
+        if (!lastFetch) {
+            return true;
+        }
+        const currentTimeStamp = new Date().getTime();
+        return (currentTimeStamp - lastFetch) / 1000 > 60;
     }
 }
