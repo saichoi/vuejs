@@ -9,7 +9,9 @@ export default {
             areas: data.areas
         }
 
-        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/coaches/${userId}.json`, {
+        const token = context.rootGetters.token;
+
+        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/coaches/${userId}.json?auth=` + token, {
             method: 'PUT', // POST는 항상 새로운 코치를 등록하지만 PUT으로 하면 이미 존재하는 경우 덮어쓰기를 하고 존재하지 않는 경우 새로 생성한다.
             body: JSON.stringify(coachData)
             
