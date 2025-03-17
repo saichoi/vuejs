@@ -1,11 +1,11 @@
 export default {
-    async contactCoach(context, paylaod) {
+    async contactCoach(context, payload) {
         const newRequest = {
-            userEmail: paylaod.email,
-            message: paylaod.message
+            userEmail: payload.email,
+            message: payload.message
         }
 
-        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/requests/${paylaod.coachId}.json`, {
+        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/requests/${payload.coachId}.json`, {
             method: 'POST',
             body: JSON.stringify(newRequest)
         });
@@ -18,13 +18,14 @@ export default {
         }
 
         newRequest.id = responseData.name;
-        newRequest.coachId = paylaod.coachId; // 서버에는 전송되지 않고 로컬데이터로 저장
+        newRequest.coachId = payload.coachId; // 서버에는 전송되지 않고 로컬데이터로 저장
 
         context.commit('addRequest', newRequest);
     },
     async fetchRequests(context) {
         const coachId = context.rootGetters.userId; // store/index.js에 있는 userId를 가져온다.
-        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/requests/${coachId}.json`);
+        const token = context.rooterGetters.token;
+        const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` + token);
         const responseData = await response.json();
 
         if (!response.ok) {
