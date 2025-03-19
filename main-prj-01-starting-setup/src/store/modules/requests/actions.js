@@ -24,7 +24,7 @@ export default {
     },
     async fetchRequests(context) {
         const coachId = context.rootGetters.userId; // store/index.js에 있는 userId를 가져온다.
-        const token = context.rooterGetters.token;
+        const token = context.rootGetters.token;
         const response = await fetch(`https://vue-http-demo-1181f-default-rtdb.firebaseio.com/requests/${coachId}.json?auth=` + token);
         const responseData = await response.json();
 
