@@ -32,6 +32,19 @@ export default {
 };
 </script>
 
+// setup의 또 다른 사용방법
+<!-- 
+<script setup>
+import { ref } from 'vue';
+ 
+const uName = ref('Maximilian');
+ 
+setTimeout(function() {
+  uName.value = 'Max';
+}, 2000);
+</script>
+ -->
+
 <style>
 * {
   box-sizing: border-box;
