@@ -1,8 +1,12 @@
 <template>
   <section class="container">
-    <h2>{{ user.name }}</h2>
+    <h2>{{ userName }}</h2>
     <h3>{{ user.age  }}</h3>
     <button @click="setAge">Change Age</button>
+    <div>
+      <input type="text" placeholder="First Name" @input="setFirstName" />
+      <input type="text" placeholder="Last Name" @input="setLastName" />
+    </div>
   </section>
 </template>
 
@@ -13,7 +17,7 @@
 // 상수만 선언해서는 템플릿에서 사용할 수 없기 때문에 setup에서 return을 해야한다.
   
 // import { ref } from 'vue'; // 다양한 형태로 사용 가능
-import { reactive } from 'vue'; // 객체 형태로만 사용 가능
+import { ref, computed, reactive } from 'vue'; // 객체 형태로만 사용 가능
 
 export default {
   // setup은 초반에 한번만 실행된다.
@@ -24,12 +28,26 @@ export default {
       name: 'Maximilan',
       age: 31
     });
+    const firstName = ref('');
+    const lastName = ref('');
+
+    const uName = computed(function() {
+      return firstName.value + ' ' + lastName.value;
+    });
 
     function setNewAge() {
       user.age = 32;
     }
 
-    return { user: user, setAge: setNewAge }
+    function setFirstName(event) {
+      firstName.value = event.target.value;
+    }
+
+    function setLastName(event) {
+      lastName.value = event.target.value;
+    }
+
+    return { userName: uName, user: user, setAge: setNewAge, setFirstName, setLastName }
   },
   // data() {
   //   return {
