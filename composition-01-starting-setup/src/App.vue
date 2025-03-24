@@ -5,12 +5,30 @@
 </template>
 
 <script>
+// ref
+// 반응형 값을 생성하기 때문에 값이 바뀌면 Vue가 인식하고 감시할 수 있다. 
+// 컴포넌트가 제대로 초기화되지 않은 시점에 실행되기 때문에 this 키워드를 사용하지 않는다.
+// 상수만 선언해서는 템플릿에서 사용할 수 없기 때문에 setup에서 return을 해야한다.
+  
+import { ref } from 'vue';
+
 export default {
-  data() {
-    return {
-      userName: 'Maximilian',
-    };
-  },
+  // setup은 초반에 한번만 실행된다.
+  setup() {
+    let uName = ref('Maximilian');
+
+    setTimeout(function() {
+      // uName = 'Max';
+      uName.value = 'Max';
+    }, 2000);
+
+    return { userName: uName }
+  }
+  // data() {
+  //   return {
+  //     userName: 'Maximilian',
+  //   };
+  // },
 };
 </script>
 
