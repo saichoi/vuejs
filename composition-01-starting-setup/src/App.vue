@@ -1,6 +1,6 @@
 <template>
   <section class="container">
-    <user-data :first-name="firstName" :last-name="lastName" :age="age"></user-data>
+    <user-data :first-name="firstName" :last-name="lastName"></user-data>
     <button @click="setAge">Change Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
@@ -16,7 +16,7 @@
 // 컴포넌트가 제대로 초기화되지 않은 시점에 실행되기 때문에 this 키워드를 사용하지 않는다.
 // 상수만 선언해서는 템플릿에서 사용할 수 없기 때문에 setup에서 return을 해야한다.
   
-import { ref, computed, watch } from 'vue';
+import { ref, computed, watch, provide } from 'vue';
 import UserData from './components/UserData.vue';
 
 export default {
@@ -32,6 +32,8 @@ export default {
     const uName = computed(function() {
       return firstName.value + ' ' + lastName.value;
     });
+
+    provide('userAge', uAge);
 
     // 첫번째 인자 : 감시 대상
     // 두번쨰 인자 : 감시 대상이 변경되면 실행되는 함수
@@ -75,6 +77,9 @@ export default {
   //   age(value) {
   //     console.log(value);
   //   }
+  // },
+  // provide() {
+  //   return { age: this.age };
   // }
 };
 </script>
