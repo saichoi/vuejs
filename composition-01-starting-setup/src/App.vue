@@ -1,7 +1,6 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
-    <h3>{{ age  }}</h3>
+    <user-data :first-name="firstName" :last-name="lastName" :age="age"></user-data>
     <button @click="setAge">Change Age</button>
     <div>
       <input type="text" placeholder="First Name" v-model="firstName" />
@@ -18,8 +17,12 @@
 // 상수만 선언해서는 템플릿에서 사용할 수 없기 때문에 setup에서 return을 해야한다.
   
 import { ref, computed, watch } from 'vue';
+import UserData from './components/UserData.vue';
 
 export default {
+  components: {
+    UserData
+  },
   setup() {
     const firstName = ref('');
     const lastName = ref('');
