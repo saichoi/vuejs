@@ -1,6 +1,7 @@
 <template>
   <section class="container">
-    <h2>{{ userName }}</h2>
+    <h2>{{ user.name }}</h2>
+    <h3>{{ user.age  }}</h3>
   </section>
 </template>
 
@@ -10,19 +11,29 @@
 // 컴포넌트가 제대로 초기화되지 않은 시점에 실행되기 때문에 this 키워드를 사용하지 않는다.
 // 상수만 선언해서는 템플릿에서 사용할 수 없기 때문에 setup에서 return을 해야한다.
   
-import { ref } from 'vue';
+// import { ref } from 'vue'; // 다양한 형태로 사용 가능
+import { reactive } from 'vue'; // 객체 형태로만 사용 가능
 
 export default {
   // setup은 초반에 한번만 실행된다.
   setup() {
-    let uName = ref('Maximilian');
+    // const uName = ref('Maximilian');
+    // const uAge = ref(31);
+    const user = reactive({
+      name: 'Maximilan',
+      age: 31
+    });
+
 
     setTimeout(function() {
       // uName = 'Max';
-      uName.value = 'Max';
+      // uName.value = 'Max';
+      // uAge.value = 32;
+      user.name = 'Max';
+      user.age = 32;
     }, 2000);
 
-    return { userName: uName }
+    return { user: user }
   }
   // data() {
   //   return {
