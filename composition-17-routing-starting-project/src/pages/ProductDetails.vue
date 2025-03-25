@@ -9,13 +9,17 @@
 
 <script>
 import { inject, computed } from 'vue';
+import { useRoute } from 'vue-router';
 
 export default {
   props: ['pid'], // router에서 넘겨준 props
-  setup(props) {
+  setup() {
     const products = inject('products');
-
-    const selectedProduct = computed(() => products.value.find(product => product.id === props.pid));
+    
+    const route = useRoute();
+    console.log(route);
+    
+    const selectedProduct = computed(() => products.value.find(product => product.id === route.params.pid)); // props.pid 혹은 route.params.pid 사용할 수 있다.
     const title = computed(() => selectedProduct.value.title);
     const price = computed(() => selectedProduct.value.price);
     const description = computed(() => selectedProduct.value.description);
