@@ -16,7 +16,7 @@
 import { computed, watch, toRefs } from 'vue';
 
 import ProjectItem from './ProjectItem.vue';
-import useSearch from '../../hook/search';
+import useSearch from '../../hooks/search';
 
 export default {
   components: {
