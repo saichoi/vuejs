@@ -3,8 +3,8 @@
         <Header />
         <hr>
         <div class="row">
-            <ServerDetail />
-            <Servers />
+            <Servers :selected-server="selectedServer" @server-selected="handleServerSelected"/>
+            <ServerDetail :server="selectedServer" />
         </div>
         <Footer />
         <hr>
@@ -13,17 +13,27 @@
 </template>
 
 <script>
-import Header from './Header.vue';
-import Footer from './Footer.vue';
-import ServerDetail from './ServerDetail.vue';
-import Servers from './Servers.vue';
+import Header from './components/layout/Header.vue';
+import Footer from './components/layout/Footer.vue';
+import ServerDetail from './components/layout/server/ServerDetail.vue';
+import Servers from './components/layout/server/Servers.vue';
 
 export default {
+    data() {
+        return {
+            selectedServer: null
+        }
+    },
     components: {
         Header,
         Footer,
         ServerDetail,
         Servers
+    },
+    methods: {
+        handleServerSelected(server) {
+            this.selectedServer = server;
+        }
     }
 }
 </script>
